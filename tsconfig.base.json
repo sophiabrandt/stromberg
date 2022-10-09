@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@stromberg/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@stromberg/episodes": ["libs/episodes/src/index.ts"],
+      "@stromberg/testing-utils": ["libs/testing-utils/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
