@@ -1,5 +1,10 @@
 <section>
-  <ng-container *ngIf="allEpisodes$ | async as episodes">
-    <stromberg-episodes-list [episodes]="episodes"></stromberg-episodes-list>
+  <ng-container *ngIf="vm$ | async as vm">
+    <stromberg-episodes-list
+      [episodes]="vm.episodes"
+      [selectable]="true"
+      (selected)="selectEpisode($event)"
+    ></stromberg-episodes-list>
+    <stromberg-episode-detail [selectedEpisode]="vm.selectedEpisode"></stromberg-episode-detail>
   </ng-container>
 </section>

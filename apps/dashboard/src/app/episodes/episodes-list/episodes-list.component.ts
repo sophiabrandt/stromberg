@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core'
 import { Episode } from '@stromberg/api-interfaces'
 
 @Component({
@@ -10,4 +10,10 @@ import { Episode } from '@stromberg/api-interfaces'
 export class EpisodesListComponent {
   @Input()
   episodes: Episode[] = []
+
+  @Input()
+  selectable = false
+
+  @Output()
+  selected = new EventEmitter()
 }

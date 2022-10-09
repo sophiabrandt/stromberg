@@ -1,0 +1,18 @@
+<ng-container *ngIf="selectedEpisode; else noDetail">
+  <article>
+    <h2>{{ selectedEpisode.title }}</h2>
+    <div class="flex">
+      <span>Season: {{ selectedEpisode.season }}, Episode: {{ selectedEpisode.episode }}</span
+      ><span>{{ selectedEpisode.releaseDate }}</span>
+    </div>
+    <p>Regie: {{ selectedEpisode.director }}</p>
+    <p>{{ selectedEpisode.description }}</p>
+  </article>
+</ng-container>
+
+<ng-template #noDetail>
+  <article>
+    <h2>Details</h2>
+    <p>&larr; Wähle eine Episode aus der Ansicht</p>
+  </article>
+</ng-template>

@@ -1,7 +1,7 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TestBed, waitForAsync } from '@angular/core/testing';
-import { DefaultEpisodesDataService } from './default-episodes-data.service';
-import { dummyEpisodes } from './dummy-episodes-data';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
+import { TestBed, waitForAsync } from '@angular/core/testing'
+import { mockEpisodes } from '@stromberg/testing-utils'
+import { DefaultEpisodesDataService } from './default-episodes-data.service'
 
 describe('DefaultEpisodesDataService', () => {
   let service: DefaultEpisodesDataService
@@ -15,11 +15,11 @@ describe('DefaultEpisodesDataService', () => {
   it('returns all episodes', waitForAsync(() => {
     setup()
     service.all().subscribe((res) => {
-      expect(res.toString()).toEqual(dummyEpisodes.toString())
+      expect(res.toString()).toEqual(mockEpisodes.toString())
     })
 
     const mockRequest = httpMock.expectOne('http://localhost:3333/episodes')
-    mockRequest.flush(dummyEpisodes)
+    mockRequest.flush(mockEpisodes)
 
     expect(mockRequest.request.method).toEqual('GET')
     httpMock.verify()

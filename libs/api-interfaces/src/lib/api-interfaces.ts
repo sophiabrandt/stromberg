@@ -9,7 +9,7 @@ export interface Episode extends BaseEntity {
   description: string
   script: string
   director: string
-  releaseDate: Date
+  releaseDate: string
   createdAt?: Date
   updatedAt?: Date
 }

@@ -24,7 +24,7 @@ export class DefaultEpisodesDataService implements AbstractEpisodesDataService {
             description: apiEpisode.description,
             script: apiEpisode.script,
             director: apiEpisode.director,
-            releaseDate: new Date(apiEpisode.releaseDate),
+            releaseDate: apiEpisode.releaseDate,
           }
         }),
       ),
