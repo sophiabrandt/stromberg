@@ -1,4 +1,3 @@
-import { NgOptimizedImage } from '@angular/common'
 import { HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
@@ -17,7 +16,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, EpisodesListComponent, EpisodesComponent],
-  imports: [BrowserModule, RouterModule.forRoot(routes), NgOptimizedImage, HttpClientModule],
+  imports: [BrowserModule, RouterModule.forRoot(routes), HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })

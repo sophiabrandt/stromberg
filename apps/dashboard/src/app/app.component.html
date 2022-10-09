@@ -1,14 +1,7 @@
 <body>
   <header>
     <nav role="navigation">
-      <a routerLink="/"
-        ><img
-          ngSrc="/assets/logo.svg"
-          width="150"
-          [height]="(150 / 250) * 150"
-          priority
-          alt="text containing the word Stromberg"
-      /></a>
+      <a routerLink="/"><img src="/assets/logo.svg" width="480" alt="text containing the word Stromberg" /></a>
       <ul>
         <li *ngFor="let link of links">
           <a [routerLink]="link.path" routerLinkActive="active">{{ link.title | uppercase }}</a>
