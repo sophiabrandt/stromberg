@@ -1,0 +1,11 @@
+<article>
+  <h2>Episodes</h2>
+  <ul class="grid">
+    <li *ngFor="let episode of episodes" class="smol-card-component">
+      <img src="https://api.lorem.space/image?w=150&h=180" />
+      <h3>{{ episode.title }}</h3>
+      <p class="truncate">{{ episode.description }}</p>
+      <p><a routerLink="/">Details</a></p>
+    </li>
+  </ul>
+</article>

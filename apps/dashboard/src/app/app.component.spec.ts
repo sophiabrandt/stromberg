@@ -1,30 +1,18 @@
-import { TestBed } from '@angular/core/testing'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { RouterTestingModule } from '@angular/router/testing'
+import { render } from '@testing-library/angular'
 import { AppComponent } from './app.component'
-import { NxWelcomeComponent } from './nx-welcome.component'
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [AppComponent, NxWelcomeComponent],
-    }).compileComponents()
-  })
-
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent)
-    const app = fixture.componentInstance
-    expect(app).toBeTruthy()
-  })
-
-  it(`should have as title 'dashboard'`, () => {
-    const fixture = TestBed.createComponent(AppComponent)
-    const app = fixture.componentInstance
-    expect(app.title).toEqual('dashboard')
-  })
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent)
-    fixture.detectChanges()
-    const compiled = fixture.nativeElement as HTMLElement
-    expect(compiled.querySelector('h1')?.textContent).toContain('Welcome dashboard')
+  it('shows App skeleton', async () => {
+    const instance = await render(AppComponent, {
+      imports: [HttpClientTestingModule, RouterTestingModule],
+    })
+    instance.getByRole('navigation')
+    instance.getByRole('img')
+    instance.getByRole('img', { name: /text containing the word stromberg/i })
+    instance.getByRole('link', { name: /home/i })
+    instance.getByRole('link', { name: /episodes/i })
+    expect(instance.getByRole('article')).toHaveTextContent(/made with the stromberg API, nx and angular/i)
   })
 })

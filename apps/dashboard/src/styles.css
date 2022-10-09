@@ -1,1 +1,117 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --space: 250px;
+}
+* *::before,
+*::after {
+  box-sizing: border-box;
+}
+/*
+Responsible Web App
+https://responsibleweb.app/#Responsive-Layout-Containers
+& Absolutely Every Layout
+https://every-layout.dev
+ */
+
+/* Flex Container */
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Grid Container */
+.grid {
+  display: grid;
+  grid-gap: 1rem;
+}
+
+@supports (width: min((var(--space, 250px)), 10%)) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--space, 250px), 100%), 1fr));
+  }
+}
+
+/* Horizontal Scrolling */
+.horizontal-scroll {
+  overflow-x: auto;
+}
+
+/* Squishy Text */
+.squishy {
+  word-break: break-word; /* Samsung browser */
+  word-wrap: break-word; /* IE 11 */
+  overflow-wrap: anywhere;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+
+/* Visually Hidden */
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.truncate {
+  width: var(--space, 250px);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/*
+https://smolcss.dev/#smol-css-grid
+ */
+.smol-card-component {
+  --img-ratio: 3/2;
+
+  display: flex;
+  flex-direction: column;
+  /* Supported for flexbox in modern browsers since April 2021 */
+  gap: 1rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.35);
+  border-radius: 0.5rem;
+}
+
+.smol-card-component > img {
+  aspect-ratio: var(--img-ratio);
+  object-fit: cover;
+  width: 100%;
+}
+
+.smol-card-component > img:first-child {
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.smol-card-component > img:last-child {
+  border-radius: 0 0 0.5rem 0.5rem;
+  margin-top: auto;
+}
+
+.smol-card-component > :not(img) {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.smol-card-component > :not(img):first-child {
+  margin-top: 1rem;
+}
+
+/* Enhanced `:not()` accepts a selector list,
+but as a fallback you can chain `:not()` instead */
+.smol-card-component > :last-of-type:not(img, h2, h3, h4) {
+  margin-bottom: 1rem;
+}
+
+.smol-card-component > :not(h2, h3, h4) {
+  font-size: 0.9rem;
+}
+
+.smol-card-component > a {
+  align-self: start;
+}

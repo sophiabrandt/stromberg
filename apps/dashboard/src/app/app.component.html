@@ -1,19 +1,32 @@
 <body>
   <header>
-    Body > HEADER
-    <nav>Header nav</nav>
+    <nav role="navigation">
+      <a routerLink="/"
+        ><img
+          ngSrc="/assets/logo.svg"
+          width="150"
+          [height]="(150 / 250) * 150"
+          priority
+          alt="text containing the word Stromberg"
+      /></a>
+      <ul>
+        <li *ngFor="let link of links">
+          <a [routerLink]="link.path" routerLinkActive="active">{{ link.title | uppercase }}</a>
+        </li>
+      </ul>
+    </nav>
   </header>
-  <nav>Body NAV</nav>
   <main>
-    <header>Body HEADER</header>
-    Body
-    <section>
-      <article>ARTICLE</article>
-      <aside>ASIDE</aside>
-    </section>
+    <router-outlet></router-outlet>
   </main>
   <footer>
-    Footer
-    <main>Footer MAIN</main>
+    <main>
+      <article>
+        <span
+          >Made with the <a href="https://stromberg-api.de">Stromberg API</a>, <a href="https://nx.dev">Nx</a> and
+          <a href="https://angular.io">Angular</a></span
+        >
+      </article>
+    </main>
   </footer>
 </body>

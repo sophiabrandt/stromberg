@@ -1,0 +1,5 @@
+<section>
+  <ng-container *ngIf="allEpisodes$ | async as episodes">
+    <stromberg-episodes-list [episodes]="episodes"></stromberg-episodes-list>
+  </ng-container>
+</section>
