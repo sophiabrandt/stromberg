@@ -1,5 +1,6 @@
 :root {
   --space: 250px;
+  --color-error: #f00;
 }
 * *::before,
 *::after {
@@ -114,4 +115,10 @@ but as a fallback you can chain `:not()` instead */
 
 .smol-card-component > a {
   align-self: start;
+}
+
+/* banners */
+.error-banner {
+  padding: 0.5em;
+  background: var(--color-error);
 }

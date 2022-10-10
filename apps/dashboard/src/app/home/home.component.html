@@ -2,4 +2,7 @@
   <ng-container *ngIf="allEpisodes$ | async as episodes">
     <stromberg-episodes-list [episodes]="episodes"></stromberg-episodes-list>
   </ng-container>
+  <ng-container *ngIf="errorMessages$ | async as em">
+    <p role="banner" class="error-banner">{{ em }}</p>
+  </ng-container>
 </section>

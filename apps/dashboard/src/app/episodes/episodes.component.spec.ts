@@ -36,7 +36,18 @@ describe('EpisodesComponent', () => {
     expect(selectSpy).toHaveBeenCalledTimes(1)
   })
 
-  async function renderSetup(mockFacadeOverwrites = {}) {
+  it('shows error messages', async () => {
+    const instance = await renderSetup(
+      {
+        getAll: () => of(null),
+      },
+      { errorMessages$: of('some error') },
+    )
+
+    expect(instance.getByRole('banner')).toHaveClass('error-banner')
+  })
+
+  async function renderSetup(mockFacadeOverwrites = {}, componentProperties = {}) {
     return await render(EpisodesComponent, {
       imports: [HttpClientTestingModule],
       declarations: [EpisodesListComponent, EpisodeDetailComponent],
@@ -46,6 +57,7 @@ describe('EpisodesComponent', () => {
           useValue: { ...mockEpisodesFacade, ...mockFacadeOverwrites },
         },
       ],
+      componentProperties,
     })
   }
 })

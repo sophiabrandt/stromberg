@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { Episode } from '@stromberg/api-interfaces'
 import { DefaultEpisodesFacadeService } from '@stromberg/episodes'
-import { combineLatest, map, Observable } from 'rxjs'
+import { catchError, combineLatest, EMPTY, map, Observable, Subject } from 'rxjs'
 
 @Component({
   selector: 'stromberg-episode',
@@ -10,7 +10,16 @@ import { combineLatest, map, Observable } from 'rxjs'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EpisodesComponent {
-  readonly allEpisodes$: Observable<Episode[]> = this.episodesFacade.getAll()
+  private errorMessages = new Subject<string>()
+
+  readonly allEpisodes$: Observable<Episode[]> = this.episodesFacade.getAll().pipe(
+    catchError((err) => {
+      this.errorMessages.next(err)
+      return EMPTY
+    }),
+  )
+
+  readonly errorMessages$ = this.errorMessages.asObservable()
 
   readonly selectedEpisode$: Observable<Episode | null> = this.episodesFacade.selectedEpisode$
 

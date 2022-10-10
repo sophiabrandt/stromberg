@@ -10,4 +10,7 @@
       (selected)="selectEpisode($event)"
     ></stromberg-episode-detail>
   </ng-container>
+  <ng-container *ngIf="errorMessages$ | async as em">
+    <p role="banner" class="error-banner">{{ em }}</p>
+  </ng-container>
 </section>

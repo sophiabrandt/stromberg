@@ -30,12 +30,12 @@ describe('EpisodeDetailComponent', () => {
     expect(selectedSpy).toHaveBeenCalledWith(null)
   })
 
-  async function renderSetup(propertiesOverWrites = {}) {
+  async function renderSetup(componentProperties = {}) {
     const defaultProperties = {
       selectedEpisode: mockEpisode,
     }
     return await render(EpisodeDetailComponent, {
-      componentProperties: { ...defaultProperties, ...propertiesOverWrites },
+      componentProperties: { ...defaultProperties, ...componentProperties },
     })
   }
 })
