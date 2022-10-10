@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { Episode } from '@stromberg/api-interfaces'
+import { Episode, HttpRequestState } from '@stromberg/api-interfaces'
 import { DefaultEpisodesFacadeService } from '@stromberg/episodes'
-import { catchError, combineLatest, EMPTY, map, Observable, Subject } from 'rxjs'
+import { catchError, map, Observable, of, startWith } from 'rxjs'
 
 @Component({
   selector: 'stromberg-episode',
@@ -10,22 +10,13 @@ import { catchError, combineLatest, EMPTY, map, Observable, Subject } from 'rxjs
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EpisodesComponent {
-  private errorMessages = new Subject<string>()
-
-  readonly allEpisodes$: Observable<Episode[]> = this.episodesFacade.getAll().pipe(
-    catchError((err) => {
-      this.errorMessages.next(err)
-      return EMPTY
-    }),
+  readonly episodesDataState$: Observable<HttpRequestState<Episode[]>> = this.episodesFacade.getAll().pipe(
+    map((value) => ({ isLoading: false, value })),
+    catchError((error) => of({ isLoading: false, error })),
+    startWith({ isLoading: true }),
   )
-
-  readonly errorMessages$ = this.errorMessages.asObservable()
 
   readonly selectedEpisode$: Observable<Episode | null> = this.episodesFacade.selectedEpisode$
-
-  readonly vm$ = combineLatest([this.allEpisodes$, this.selectedEpisode$]).pipe(
-    map(([episodes, selectedEpisode]) => ({ episodes, selectedEpisode })),
-  )
 
   constructor(private episodesFacade: DefaultEpisodesFacadeService) {}
 

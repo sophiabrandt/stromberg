@@ -1,16 +1,17 @@
 <section>
-  <ng-container *ngIf="vm$ | async as vm">
+  <ng-container *ngIf="episodesDataState$ | async as episodesData">
+    <stromberg-show-loading *ngIf="episodesData.isLoading"></stromberg-show-loading>
     <stromberg-episodes-list
-      [episodes]="vm.episodes"
+      *ngIf="episodesData.value"
+      [episodes]="episodesData.value"
       [selectable]="true"
       (selected)="selectEpisode($event)"
     ></stromberg-episodes-list>
     <stromberg-episode-detail
-      [selectedEpisode]="vm.selectedEpisode"
+      *ngIf="episodesData.value"
+      [selectedEpisode]="selectedEpisode$ | async"
       (selected)="selectEpisode($event)"
     ></stromberg-episode-detail>
-  </ng-container>
-  <ng-container *ngIf="errorMessages$ | async as em">
-    <p role="banner" class="error-banner">{{ em }}</p>
+    <p *ngIf="episodesData.error" role="banner" class="error-banner">{{ episodesData.error }}</p>
   </ng-container>
 </section>

@@ -33,7 +33,7 @@ describe('HomeComponent', () => {
         },
       ],
       componentProperties: {
-        errorMessages$: of('some error'),
+        episodesDataState$: of({ isLoading: false, error: new Error('http request error') }),
       },
     })
 

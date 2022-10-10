@@ -41,7 +41,10 @@ describe('EpisodesComponent', () => {
       {
         getAll: () => of(null),
       },
-      { errorMessages$: of('some error') },
+      {
+        episodesDataState$: of({ isLoading: false, error: new Error('http request error') }),
+        selectedEpisode$: of(null),
+      },
     )
 
     expect(instance.getByRole('banner')).toHaveClass('error-banner')
