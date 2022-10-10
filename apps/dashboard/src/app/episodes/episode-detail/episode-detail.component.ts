@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core'
 import { Episode } from '@stromberg/api-interfaces'
 
 @Component({
@@ -10,4 +10,7 @@ import { Episode } from '@stromberg/api-interfaces'
 export class EpisodeDetailComponent {
   @Input()
   selectedEpisode: Episode | null = null
+
+  @Output()
+  selected = new EventEmitter()
 }

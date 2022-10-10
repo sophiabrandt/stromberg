@@ -1,6 +1,9 @@
 <ng-container *ngIf="selectedEpisode; else noDetail">
   <article>
-    <h2>{{ selectedEpisode.title }}</h2>
+    <div class="flex">
+      <h2>{{ selectedEpisode.title }}</h2>
+      <input type="reset" value="Reset" (click)="selected.emit(null)" />
+    </div>
     <div class="flex">
       <span>Season: {{ selectedEpisode.season }}, Episode: {{ selectedEpisode.episode }}</span
       ><span>{{ selectedEpisode.releaseDate }}</span>

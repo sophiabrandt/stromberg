@@ -5,6 +5,9 @@
       [selectable]="true"
       (selected)="selectEpisode($event)"
     ></stromberg-episodes-list>
-    <stromberg-episode-detail [selectedEpisode]="vm.selectedEpisode"></stromberg-episode-detail>
+    <stromberg-episode-detail
+      [selectedEpisode]="vm.selectedEpisode"
+      (selected)="selectEpisode($event)"
+    ></stromberg-episode-detail>
   </ng-container>
 </section>

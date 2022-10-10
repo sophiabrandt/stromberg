@@ -1,3 +1,7 @@
 .flex {
   justify-content: space-between;
 }
+
+input[type='reset'] {
+  margin: 0.5rem 0;
+}
