@@ -1,7 +1,11 @@
 <section>
   <ng-container *ngIf="episodesDataState$ | async as episodesData">
     <stromberg-show-loading *ngIf="episodesData.isLoading"></stromberg-show-loading>
-    <stromberg-episodes-list *ngIf="episodesData.value" [episodes]="episodesData.value"></stromberg-episodes-list>
+    <stromberg-episodes-list
+      *ngIf="episodesData.value"
+      [episodes]="episodesData.value"
+      [episodesPerPage]="8"
+    ></stromberg-episodes-list>
     <p *ngIf="episodesData.error" role="banner" class="error-banner">{{ episodesData.error }}</p>
   </ng-container>
 </section>

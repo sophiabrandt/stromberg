@@ -1,9 +1,14 @@
 <article>
   <h2>Episoden</h2>
+  <pagination-controls
+    class="stromberg-pagination"
+    (pageChange)="page = $event"
+    [responsive]="true"
+  ></pagination-controls>
   <ul class="grid">
     <li
       [ngClass]="selectable ? 'mousePointer' : ''"
-      *ngFor="let episode of episodes"
+      *ngFor="let episode of episodes | paginate: { itemsPerPage: episodesPerPage, currentPage: page }"
       class="smol-card-component"
       (click)="selected.emit(episode)"
     >

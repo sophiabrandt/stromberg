@@ -45,6 +45,7 @@ specifiers:
   jest-environment-jsdom: 28.1.1
   jest-preset-angular: ~12.2.2
   json-server: ^0.17.0
+  ngx-pagination: ^6.0.2
   nx: 14.8.3
   prettier: ^2.6.2
   rxjs: ~7.5.0
@@ -64,6 +65,7 @@ dependencies:
   '@angular/platform-browser-dynamic': 14.2.4_utakpv4yy4yulu3zbqkiu5no6i
   '@angular/router': 14.2.4_cqdintjzxymf4eniujcvvl2rx4
   '@nrwl/angular': 14.8.3_jddbyz6zdugyg3tlabco5xuvtq
+  ngx-pagination: 6.0.2_nzl3a664mr3mbqmrbnd2ktd2wa
   rxjs: 7.5.7
   tslib: 2.4.0
   zone.js: 0.11.8
@@ -10194,6 +10196,18 @@ packages:
   /neo-async/2.6.2:
     resolution:
       { integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw== }
+
+  /ngx-pagination/6.0.2_nzl3a664mr3mbqmrbnd2ktd2wa:
+    resolution:
+      { integrity: sha512-7N4FA244ls7h/977EqvcDXuyB/U5rPJI+FD0Zj9orrXb+kX2SOX0WP+yQw50Gm/Dy9aPOE91FkgoYzGyRSPY0A== }
+    peerDependencies:
+      '@angular/common': '>=13.0.0'
+      '@angular/core': '>=13.0.0'
+    dependencies:
+      '@angular/common': 14.2.4_aneyabyii3l2nbepdg3zrprqxa
+      '@angular/core': 14.2.4_rxjs@7.5.7+zone.js@0.11.8
+      tslib: 2.4.0
+    dev: false
 
   /nice-napi/1.0.2:
     resolution:

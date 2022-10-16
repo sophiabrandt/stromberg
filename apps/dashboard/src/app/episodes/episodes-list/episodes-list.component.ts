@@ -14,6 +14,11 @@ export class EpisodesListComponent {
   @Input()
   selectable = false
 
+  @Input()
+  episodesPerPage = 4
+
   @Output()
   selected = new EventEmitter()
+
+  page = 1
 }

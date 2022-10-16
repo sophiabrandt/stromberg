@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { RouterModule, Routes } from '@angular/router'
 import { ShowLoadingComponent } from '@stromberg/ui'
+import { NgxPaginationModule } from 'ngx-pagination'
 
 import { AppComponent } from './app.component'
 import { EpisodeDetailComponent } from './episodes/episode-detail/episode-detail.component'
@@ -18,7 +19,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, EpisodesListComponent, EpisodesComponent, EpisodeDetailComponent],
-  imports: [BrowserModule, RouterModule.forRoot(routes), HttpClientModule, ShowLoadingComponent],
+  imports: [BrowserModule, RouterModule.forRoot(routes), HttpClientModule, ShowLoadingComponent, NgxPaginationModule],
   providers: [],
   bootstrap: [AppComponent],
 })

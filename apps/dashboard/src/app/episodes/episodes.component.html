@@ -5,6 +5,7 @@
       *ngIf="episodesData.value"
       [episodes]="episodesData.value"
       [selectable]="true"
+      [episodesPerPage]="4"
       (selected)="selectEpisode($event)"
     ></stromberg-episodes-list>
     <stromberg-episode-detail

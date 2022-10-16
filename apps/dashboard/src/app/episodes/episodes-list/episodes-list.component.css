@@ -1,3 +1,7 @@
 .mousePointer {
   cursor: pointer;
 }
+
+.stromberg-pagination ::ng-deep .ngx-pagination .current {
+  background: #005ea5;
+}
