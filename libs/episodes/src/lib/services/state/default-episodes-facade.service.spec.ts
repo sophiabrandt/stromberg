@@ -12,7 +12,7 @@ describe('EpisodesFacadeService', () => {
     await expect(lastValueFrom(facade.getAll())).resolves.toStrictEqual(mockEpisodes)
   })
 
-  it('selects an episode', waitForAsync(async () => {
+  it('selects an episode', waitForAsync(() => {
     const facade = setup()
     const selectSpy = jest.spyOn(facade, 'selectEpisode')
 
@@ -20,7 +20,7 @@ describe('EpisodesFacadeService', () => {
 
     expect(selectSpy).toHaveBeenCalledTimes(1)
     expect(selectSpy).toHaveBeenCalledWith(mockEpisode)
-    await facade.selectedEpisode$.subscribe((res) => {
+    facade.selectedEpisode$.subscribe((res) => {
       expect(res).toBe(mockEpisode)
     })
   }))
