@@ -11,22 +11,24 @@ import { AbstractEpisodesDataService } from './abstract-episodes-data.service'
 export class DefaultEpisodesDataService implements AbstractEpisodesDataService {
   constructor(private http: HttpClient, @Inject(EPISODES_API_URL) private episodesApiUrl: string) {}
 
+  private episodesCache$: Observable<Episode[]> | null = null
+
   all(): Observable<Episode[]> {
+    if (!this.episodesCache$) {
+      this.episodesCache$ = this.getEpisodes()
+    }
+    return this.episodesCache$
+  }
+
+  private getEpisodes(): Observable<Episode[]> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
     return this.http.get<Episode[]>(this.episodesApiUrl, { headers }).pipe(
       filter((episodes) => episodes !== undefined),
       map((episodes) =>
         episodes.map((apiEpisode) => {
-          return {
-            id: apiEpisode.id,
-            episode: apiEpisode.episode,
-            title: apiEpisode.title,
-            season: apiEpisode.season,
-            description: apiEpisode.description,
-            script: apiEpisode.script,
-            director: apiEpisode.director,
-            releaseDate: apiEpisode.releaseDate,
-          }
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { createdAt, updatedAt, ...rest } = apiEpisode
+          return rest
         }),
       ),
       shareReplay({ refCount: true, bufferSize: 1 }),
