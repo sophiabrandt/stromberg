@@ -1,15 +1,14 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
-import { Inject, Injectable } from '@angular/core'
+import { Injectable } from '@angular/core'
 import { Episode } from '@stromberg/api-interfaces'
 import { catchError, filter, map, Observable, shareReplay, throwError } from 'rxjs'
-import { EPISODES_API_URL } from '../episodes.service.tokens'
 import { AbstractEpisodesDataService } from './abstract-episodes-data.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class DefaultEpisodesDataService implements AbstractEpisodesDataService {
-  constructor(private http: HttpClient, @Inject(EPISODES_API_URL) private episodesApiUrl: string) {}
+  constructor(private http: HttpClient) {}
 
   private episodesCache$: Observable<Episode[]> | null = null
 
@@ -22,7 +21,7 @@ export class DefaultEpisodesDataService implements AbstractEpisodesDataService {
 
   private getEpisodes(): Observable<Episode[]> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
-    return this.http.get<Episode[]>(this.episodesApiUrl, { headers }).pipe(
+    return this.http.get<Episode[]>('/api/episodes', { headers }).pipe(
       filter((episodes) => episodes !== undefined),
       map((episodes) =>
         episodes.map((apiEpisode) => {

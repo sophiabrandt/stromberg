@@ -25,6 +25,6 @@ jsonServer.get('/error/404', (req, res) => {
   })
 })
 
-jsonServer.use(jsonRouter)
+jsonServer.use('/api', jsonRouter)
 
 export default jsonServer

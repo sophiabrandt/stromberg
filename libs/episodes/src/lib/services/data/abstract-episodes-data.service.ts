@@ -1,13 +1,11 @@
-import { HttpClient } from '@angular/common/http'
-import { Injectable, Injector } from '@angular/core'
+import { Injectable } from '@angular/core'
 import { Episode } from '@stromberg/api-interfaces'
 import { Observable } from 'rxjs'
-import { episodesDataServiceFactory } from './episodes-data-service-factory'
+import { DefaultEpisodesDataService } from './default-episodes-data.service'
 
 @Injectable({
   providedIn: 'root',
-  useFactory: episodesDataServiceFactory,
-  deps: [HttpClient, Injector],
+  useClass: DefaultEpisodesDataService,
 })
 export abstract class AbstractEpisodesDataService {
   abstract all(): Observable<Episode[]>

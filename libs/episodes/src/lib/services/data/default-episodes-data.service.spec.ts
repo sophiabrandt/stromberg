@@ -16,7 +16,7 @@ describe('DefaultEpisodesDataService', () => {
     expect(lastValueFrom(service.all())).resolves.toStrictEqual(mockEpisodes)
 
     // only expect one HTTP call, even though two services have subscribed
-    const mockRequest = httpMock.expectOne('http://localhost:3333/episodes')
+    const mockRequest = httpMock.expectOne('/api/episodes')
     mockRequest.flush(mockEpisodes)
 
     expect(mockRequest.request.method).toEqual('GET')
