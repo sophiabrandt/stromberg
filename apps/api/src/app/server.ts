@@ -1,4 +1,4 @@
-import { bodyParser, create, defaults, rewriter, router } from 'json-server'
+import { bodyParser, create, defaults, router } from 'json-server'
 import db from './db.json'
 
 const jsonServer = create()
