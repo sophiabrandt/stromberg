@@ -1,5 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing'
-import { DefaultEpisodesFacadeService } from '@stromberg/episodes'
+import { EpisodesFacadeService } from '@stromberg/episodes'
 import { assertType, mockEpisode, mockEpisodesFacade } from '@stromberg/testing-utils'
 import { render } from '@testing-library/angular'
 import { NgxPaginationModule } from 'ngx-pagination'
@@ -28,7 +28,7 @@ describe('EpisodesComponent', () => {
   })
 
   it('selects an episode for a detail view', async () => {
-    const component = new EpisodesComponent(assertType<DefaultEpisodesFacadeService>(mockEpisodesFacade))
+    const component = new EpisodesComponent(assertType<EpisodesFacadeService>(mockEpisodesFacade))
     const selectSpy = jest.spyOn(mockEpisodesFacade, 'selectEpisode')
 
     component.selectEpisode(mockEpisode)
@@ -57,7 +57,7 @@ describe('EpisodesComponent', () => {
       declarations: [EpisodesListComponent, EpisodeDetailComponent],
       providers: [
         {
-          provide: DefaultEpisodesFacadeService,
+          provide: EpisodesFacadeService,
           useValue: { ...mockEpisodesFacade, ...mockFacadeOverwrites },
         },
       ],

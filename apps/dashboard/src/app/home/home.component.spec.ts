@@ -1,5 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing'
-import { DefaultEpisodesFacadeService } from '@stromberg/episodes'
+import { EpisodesFacadeService } from '@stromberg/episodes'
 import { mockEpisodesFacade } from '@stromberg/testing-utils'
 import { render } from '@testing-library/angular'
 import { NgxPaginationModule } from 'ngx-pagination'
@@ -9,35 +9,35 @@ import { HomeComponent } from './home.component'
 
 describe('HomeComponent', () => {
   it('shows episodes on HomeComponent', async () => {
-    const instance = await render(HomeComponent, {
-      imports: [HttpClientTestingModule, NgxPaginationModule],
-      declarations: [EpisodesListComponent],
-      providers: [
-        {
-          provide: DefaultEpisodesFacadeService,
-          useValue: mockEpisodesFacade,
-        },
-      ],
-    })
+    const instance = await renderSetup()
     instance.getByRole('heading', { name: /herr nehring/i })
     expect(instance.getAllByRole('listitem')[0]).not.toHaveClass('mousePointer')
   })
 
   it('shows error messages', async () => {
-    const instance = await render(HomeComponent, {
+    const instance = await renderSetup(
+      {
+        getAll: () => of(null),
+      },
+      {
+        episodesDataState$: of({ isLoading: false, error: new Error('http request error') }),
+      },
+    )
+
+    expect(instance.getByRole('banner')).toHaveClass('error-banner')
+  })
+
+  async function renderSetup(mockFacadeOverwrites = {}, componentProperties = {}) {
+    return await render(HomeComponent, {
       imports: [HttpClientTestingModule, NgxPaginationModule],
       declarations: [EpisodesListComponent],
       providers: [
         {
-          provide: DefaultEpisodesFacadeService,
-          useValue: { ...mockEpisodesFacade, getAll: () => of(null) },
+          provide: EpisodesFacadeService,
+          useValue: { ...mockEpisodesFacade, ...mockFacadeOverwrites },
         },
       ],
-      componentProperties: {
-        episodesDataState$: of({ isLoading: false, error: new Error('http request error') }),
-      },
+      componentProperties,
     })
-
-    expect(instance.getByRole('banner')).toHaveClass('error-banner')
-  })
+  }
 })

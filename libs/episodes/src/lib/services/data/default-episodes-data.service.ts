@@ -22,9 +22,9 @@ export class DefaultEpisodesDataService implements AbstractEpisodesDataService {
   private getEpisodes(): Observable<Episode[]> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')
     return this.http.get<Episode[]>('/api/episodes', { headers }).pipe(
-      filter((episodes) => episodes !== undefined),
-      map((episodes) =>
-        episodes.map((apiEpisode) => {
+      filter((episodes: Episode[]) => episodes !== undefined),
+      map((episodes: Episode[]) =>
+        episodes.map((apiEpisode: Episode) => {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { createdAt, updatedAt, ...rest } = apiEpisode
           return rest

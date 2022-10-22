@@ -1,16 +1,17 @@
 import { waitForAsync } from '@angular/core/testing'
 import { assertType, mockEpisode, mockEpisodes } from '@stromberg/testing-utils'
-import { lastValueFrom } from 'rxjs'
+import { lastValueFrom, of } from 'rxjs'
 import { DefaultEpisodesDataService } from '../data/default-episodes-data.service'
-import { DummyEpisodesDataService } from '../data/dummy-episodes-data.service'
-import { DefaultEpisodesFacadeService } from './default-episodes-facade.service'
+import { EpisodesFacadeService } from './episodes-facade.service'
 
 describe('EpisodesFacadeService', () => {
-  it('calls the episodesDataService for getAll()', async () => {
+  it('calls the episodesDataService for getAll()', waitForAsync(() => {
     const facade = setup()
+    const getAllSpy = jest.spyOn(facade, 'getAll')
 
-    await expect(lastValueFrom(facade.getAll())).resolves.toStrictEqual(mockEpisodes)
-  })
+    expect(lastValueFrom(facade.getAll())).resolves.toStrictEqual(mockEpisodes)
+    expect(getAllSpy).toHaveBeenCalledTimes(1)
+  }))
 
   it('selects an episode', waitForAsync(() => {
     const facade = setup()
@@ -20,13 +21,12 @@ describe('EpisodesFacadeService', () => {
 
     expect(selectSpy).toHaveBeenCalledTimes(1)
     expect(selectSpy).toHaveBeenCalledWith(mockEpisode)
-    facade.selectedEpisode$.subscribe((res) => {
-      expect(res).toBe(mockEpisode)
-    })
   }))
 
   function setup() {
-    const dataService = new DummyEpisodesDataService()
-    return new DefaultEpisodesFacadeService(assertType<DefaultEpisodesDataService>(dataService))
+    const dataService = {
+      all: jest.fn().mockReturnValue(of(mockEpisodes)),
+    }
+    return new EpisodesFacadeService(assertType<DefaultEpisodesDataService>(dataService))
   }
 })

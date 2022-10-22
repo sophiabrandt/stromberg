@@ -1,2 +1,2 @@
 export * from './lib/episodes.module'
-export * from './lib/services/state/default-episodes-facade.service'
+export * from './lib/services/state/episodes-facade.service'

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { Episode, HttpRequestState } from '@stromberg/api-interfaces'
-import { DefaultEpisodesFacadeService } from '@stromberg/episodes'
+import { EpisodesFacadeService } from '@stromberg/episodes'
 import { catchError, map, Observable, of, startWith } from 'rxjs'
 
 @Component({
@@ -18,7 +18,7 @@ export class EpisodesComponent {
 
   readonly selectedEpisode$: Observable<Episode | null> = this.episodesFacade.selectedEpisode$
 
-  constructor(private episodesFacade: DefaultEpisodesFacadeService) {}
+  constructor(private episodesFacade: EpisodesFacadeService) {}
 
   selectEpisode(episode: Episode) {
     this.episodesFacade.selectEpisode(episode)

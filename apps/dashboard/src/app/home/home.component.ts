@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { Episode, HttpRequestState } from '@stromberg/api-interfaces'
-import { DefaultEpisodesFacadeService } from '@stromberg/episodes'
+import { EpisodesFacadeService } from '@stromberg/episodes'
 import { catchError, map, Observable, of, startWith } from 'rxjs'
 
 @Component({
@@ -10,11 +10,11 @@ import { catchError, map, Observable, of, startWith } from 'rxjs'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
-  episodesDataState$: Observable<HttpRequestState<Episode[]>> = this.episodesFacade.getAll().pipe(
+  readonly episodesDataState$: Observable<HttpRequestState<Episode[]>> = this.episodesFacade.getAll().pipe(
     map((value) => ({ isLoading: false, value })),
     catchError((error) => of({ isLoading: false, error })),
     startWith({ isLoading: true }),
   )
 
-  constructor(private episodesFacade: DefaultEpisodesFacadeService) {}
+  constructor(private episodesFacade: EpisodesFacadeService) {}
 }

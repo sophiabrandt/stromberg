@@ -6,7 +6,7 @@ import { DefaultEpisodesDataService } from '../data/default-episodes-data.servic
 @Injectable({
   providedIn: 'root',
 })
-export class DefaultEpisodesFacadeService {
+export class EpisodesFacadeService {
   private selectedEpisode = new BehaviorSubject<Episode | null>(null)
 
   readonly selectedEpisode$ = this.selectedEpisode.asObservable()
