@@ -1,6 +1,7 @@
 import { mockEpisodes } from '@stromberg/testing-utils'
 import { render } from '@testing-library/angular'
-import userEvent from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event'
+import { NgxPaginationModule } from 'ngx-pagination'
 import { EpisodesListComponent } from './episodes-list.component'
 
 describe('EpisodesListComponent', () => {
@@ -9,6 +10,7 @@ describe('EpisodesListComponent', () => {
       componentProperties: {
         episodes: mockEpisodes,
       },
+      imports: [NgxPaginationModule],
     })
 
     instance.getByRole('heading', { name: /episoden/i })
@@ -32,6 +34,7 @@ describe('EpisodesListComponent', () => {
           selectable: true,
           selected: selectedSpy,
         },
+        imports: [NgxPaginationModule],
       },
     )
     await userEvent.click(instance.getByRole('heading', { name: /malik/i }))

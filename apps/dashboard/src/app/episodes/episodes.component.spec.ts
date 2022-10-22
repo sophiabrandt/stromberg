@@ -2,6 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { DefaultEpisodesFacadeService } from '@stromberg/episodes'
 import { assertType, mockEpisode, mockEpisodesFacade } from '@stromberg/testing-utils'
 import { render } from '@testing-library/angular'
+import { NgxPaginationModule } from 'ngx-pagination'
 import { of } from 'rxjs'
 import { EpisodeDetailComponent } from './episode-detail/episode-detail.component'
 import { EpisodesListComponent } from './episodes-list/episodes-list.component'
@@ -20,7 +21,7 @@ describe('EpisodesComponent', () => {
       selectedEpisode$: of(mockEpisode),
     })
     instance.getByRole('heading', { name: /herr nehring/i })
-    expect(instance.getAllByRole('listitem')[0]).toHaveClass('mousePointer')
+    expect(instance.getAllByRole('listitem').slice(-1)[0]).toHaveClass('mousePointer')
     expect(instance.queryByText(/wähle eine episode aus der ansicht/i)).not.toBeInTheDocument()
     instance.getByText(/regie: arne feldhusen/i)
     instance.getByText(/season: 3, episode: 4/i)
@@ -52,7 +53,7 @@ describe('EpisodesComponent', () => {
 
   async function renderSetup(mockFacadeOverwrites = {}, componentProperties = {}) {
     return await render(EpisodesComponent, {
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, NgxPaginationModule],
       declarations: [EpisodesListComponent, EpisodeDetailComponent],
       providers: [
         {

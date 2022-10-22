@@ -2,6 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { DefaultEpisodesFacadeService } from '@stromberg/episodes'
 import { mockEpisodesFacade } from '@stromberg/testing-utils'
 import { render } from '@testing-library/angular'
+import { NgxPaginationModule } from 'ngx-pagination'
 import { of } from 'rxjs'
 import { EpisodesListComponent } from '../episodes/episodes-list/episodes-list.component'
 import { HomeComponent } from './home.component'
@@ -9,7 +10,7 @@ import { HomeComponent } from './home.component'
 describe('HomeComponent', () => {
   it('shows episodes on HomeComponent', async () => {
     const instance = await render(HomeComponent, {
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, NgxPaginationModule],
       declarations: [EpisodesListComponent],
       providers: [
         {
@@ -24,7 +25,7 @@ describe('HomeComponent', () => {
 
   it('shows error messages', async () => {
     const instance = await render(HomeComponent, {
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, NgxPaginationModule],
       declarations: [EpisodesListComponent],
       providers: [
         {
