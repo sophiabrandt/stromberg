@@ -7,7 +7,7 @@ export interface HttpRequestState<T> {
 }
 
 export interface BaseEntity {
-  id: string | number | null
+  id: string | number
 }
 
 export interface Episode extends BaseEntity {

@@ -1,7 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { ActivatedRoute, Router } from '@angular/router'
 import { EpisodesFacadeService } from '@stromberg/episodes'
-import { assertType, mockEpisode, mockEpisodesFacade } from '@stromberg/testing-utils'
+import { mockEpisode, mockEpisodesFacade } from '@stromberg/testing-utils'
 import { render } from '@testing-library/angular'
+import userEvent from '@testing-library/user-event'
 import { NgxPaginationModule } from 'ngx-pagination'
 import { of } from 'rxjs'
 import { EpisodeDetailComponent } from './episode-detail/episode-detail.component'
@@ -9,6 +11,10 @@ import { EpisodesListComponent } from './episodes-list/episodes-list.component'
 import { EpisodesComponent } from './episodes.component'
 
 describe('EpisodesComponent', () => {
+  const mockRouter = {
+    navigate: jest.fn().mockResolvedValue(null),
+  }
+
   it('renders episodes with no details', async () => {
     const instance = await renderSetup()
     instance.getByRole('heading', { name: /herr nehring/i })
@@ -28,13 +34,12 @@ describe('EpisodesComponent', () => {
   })
 
   it('selects an episode for a detail view', async () => {
-    const component = new EpisodesComponent(assertType<EpisodesFacadeService>(mockEpisodesFacade))
-    const selectSpy = jest.spyOn(mockEpisodesFacade, 'selectEpisode')
+    const instance = await renderSetup()
+    const routerSpy = jest.spyOn(mockRouter, 'navigate')
 
-    component.selectEpisode(mockEpisode)
-
-    expect(selectSpy).toHaveBeenCalledWith(mockEpisode)
-    expect(selectSpy).toHaveBeenCalledTimes(1)
+    await userEvent.click(instance.getByRole('heading', { name: /herr nehring/i }))
+    expect(routerSpy).toHaveBeenCalledTimes(1)
+    expect(routerSpy).toHaveBeenCalledWith(['episodes', 35])
   })
 
   it('shows error messages', async () => {
@@ -59,6 +64,16 @@ describe('EpisodesComponent', () => {
         {
           provide: EpisodesFacadeService,
           useValue: { ...mockEpisodesFacade, ...mockFacadeOverwrites },
+        },
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({ id: 1 }),
+          },
+        },
+        {
+          provide: Router,
+          useValue: mockRouter,
         },
       ],
       componentProperties,

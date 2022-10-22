@@ -17,7 +17,7 @@ export class EpisodesFacadeService {
     return this.episodesService.all()
   }
 
-  selectEpisode(episode: Episode): void {
+  selectEpisode(episode: Episode | null): void {
     this.selectedEpisode.next(episode)
   }
 }
