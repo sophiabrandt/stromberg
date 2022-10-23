@@ -33,13 +33,29 @@ describe('EpisodesComponent', () => {
     instance.getByText(/season: 3, episode: 4/i)
   })
 
-  it('selects an episode for a detail view', async () => {
-    const instance = await renderSetup()
+  it('selects an episode for a detail view and changes navigation', async () => {
     const routerSpy = jest.spyOn(mockRouter, 'navigate')
+    const instance = await renderSetup()
 
     await userEvent.click(instance.getByRole('heading', { name: /herr nehring/i }))
+
     expect(routerSpy).toHaveBeenCalledTimes(1)
     expect(routerSpy).toHaveBeenCalledWith(['episodes', 35])
+  })
+
+  it('resets an episode in the detail view and changes navigation back to /episodes', async () => {
+    const routerSpy = jest.spyOn(mockRouter, 'navigate')
+    const instance = await renderSetup(
+      {},
+      {
+        selectedEpisode$: of(mockEpisode),
+      },
+    )
+
+    await userEvent.click(instance.getByRole('button', { name: /reset/i }))
+
+    expect(routerSpy).toHaveBeenCalledTimes(1)
+    expect(routerSpy).toHaveBeenCalledWith(['episodes'])
   })
 
   it('shows error messages', async () => {
