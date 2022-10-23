@@ -7,10 +7,10 @@ import { EpisodesListComponent } from './episodes-list.component'
 describe('EpisodesListComponent', () => {
   it('renders episodes', async () => {
     const instance = await render(EpisodesListComponent, {
+      imports: [NgxPaginationModule],
       componentProperties: {
         episodes: mockEpisodes,
       },
-      imports: [NgxPaginationModule],
     })
 
     instance.getByRole('heading', { name: /episoden/i })
@@ -28,13 +28,13 @@ describe('EpisodesListComponent', () => {
                   </stromberg-episodes-list>
                 `,
       {
+        imports: [NgxPaginationModule],
         declarations: [EpisodesListComponent],
         componentProperties: {
           episodes: mockEpisodes,
           selectable: true,
           selected: selectedSpy,
         },
-        imports: [NgxPaginationModule],
       },
     )
     await userEvent.click(instance.getByRole('heading', { name: /malik/i }))
