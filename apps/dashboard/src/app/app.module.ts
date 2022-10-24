@@ -14,9 +14,9 @@ import { HomeComponent } from './home/home.component'
 import { ApiInterceptor } from './interceptors/api-interceptor'
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'episodes/:id', component: EpisodesComponent },
   { path: 'episodes', component: EpisodesComponent },
+  { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: '**', redirectTo: '/' },
 ]
 
