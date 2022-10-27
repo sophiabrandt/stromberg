@@ -1,0 +1,4 @@
+{
+  "*.{ts,js}": ["pnpm exec nx run-many --all --target=lint", "pnpm exec nx format:write"],
+  "*.{html,css,json,md}": "pnpm exec nx format:write"
+}
