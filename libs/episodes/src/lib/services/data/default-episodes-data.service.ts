@@ -26,7 +26,7 @@ export class DefaultEpisodesDataService implements AbstractEpisodesDataService {
       map((episodes: Episode[]) =>
         episodes.map((apiEpisode: Episode) => {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          const { createdAt, updatedAt, ...rest } = apiEpisode
+          const { createdAt, updatedAt, ...rest } = apiEpisode || {}
           return rest
         }),
       ),

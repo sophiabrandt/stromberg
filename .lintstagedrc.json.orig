@@ -1,0 +1,9 @@
+{
+<<<<<<< HEAD
+  "*.{ts,js}": ["pnpm exec nx run-many --all --target=lint", "pnpm exec nx format:write"],
+||||||| parent of 2c5ea5a (chore: add husky, lint-staged, commitlint)
+=======
+  "*.{ts,js}": ["pnpm exec nx lint run-many --all --target=lint", "pnpm exec nx format:write"],
+>>>>>>> 2c5ea5a (chore: add husky, lint-staged, commitlint)
+  "*.{html,css,json,md}": "pnpm exec nx format:write"
+}

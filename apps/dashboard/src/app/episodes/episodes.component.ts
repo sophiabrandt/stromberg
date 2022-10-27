@@ -25,7 +25,7 @@ export class EpisodesComponent implements OnInit {
   selectEpisode(episode: Episode | null) {
     this.episodesFacade.selectEpisode(episode)
     episode?.id
-      ? this.router.navigate(['episodes', episode?.id]).then((r) => r)
+      ? this.router.navigate(['episodes', episode.id]).then((r) => r)
       : this.router.navigate(['episodes']).then((r) => r)
   }
 
