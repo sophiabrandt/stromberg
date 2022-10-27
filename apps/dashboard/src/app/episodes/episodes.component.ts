@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Params, Router } from '@angular/router'
 import { Episode, HttpRequestState } from '@stromberg/api-interfaces'
 import { EpisodesFacadeService } from '@stromberg/episodes'
@@ -8,7 +8,6 @@ import { catchError, map, Observable, of, startWith } from 'rxjs'
   selector: 'stromberg-episode',
   templateUrl: './episodes.component.html',
   styleUrls: ['./episodes.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EpisodesComponent implements OnInit {
   readonly episodesDataState$: Observable<HttpRequestState<Episode[]>> = this.episodesFacade.getAll().pipe(
