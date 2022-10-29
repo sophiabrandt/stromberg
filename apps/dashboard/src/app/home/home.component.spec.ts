@@ -4,7 +4,7 @@ import { mockEpisodesFacade } from '@stromberg/testing-utils'
 import { render } from '@testing-library/angular'
 import { NgxPaginationModule } from 'ngx-pagination'
 import { of } from 'rxjs'
-import { EpisodesListComponent } from '../episodes/episodes-list/episodes-list.component'
+import { EpisodesListComponent } from '../episodes/ui/episodes-list/episodes-list.component'
 import { HomeComponent } from './home.component'
 
 describe('HomeComponent', () => {
@@ -29,8 +29,7 @@ describe('HomeComponent', () => {
 
   async function renderSetup(mockFacadeOverwrites = {}, componentProperties = {}) {
     return await render(HomeComponent, {
-      imports: [HttpClientTestingModule, NgxPaginationModule],
-      declarations: [EpisodesListComponent],
+      imports: [HttpClientTestingModule, NgxPaginationModule, EpisodesListComponent],
       providers: [
         {
           provide: EpisodesFacadeService,

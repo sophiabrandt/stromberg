@@ -1,13 +1,19 @@
+import { CommonModule } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Params, Router } from '@angular/router'
 import { Episode, HttpRequestState } from '@stromberg/api-interfaces'
 import { EpisodesFacadeService } from '@stromberg/episodes'
+import { ShowLoadingComponent } from '@stromberg/ui'
 import { catchError, map, Observable, of, startWith } from 'rxjs'
+import { EpisodeDetailComponent } from './ui/episode-detail/episode-detail.component'
+import { EpisodesListComponent } from './ui/episodes-list/episodes-list.component'
 
 @Component({
   selector: 'stromberg-episode',
   templateUrl: './episodes.component.html',
   styleUrls: ['./episodes.component.css'],
+  standalone: true,
+  imports: [CommonModule, EpisodesListComponent, EpisodeDetailComponent, ShowLoadingComponent],
 })
 export class EpisodesComponent implements OnInit {
   readonly episodesDataState$: Observable<HttpRequestState<Episode[]>> = this.episodesFacade.getAll().pipe(

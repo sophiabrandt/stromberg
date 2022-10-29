@@ -28,8 +28,7 @@ describe('EpisodesListComponent', () => {
                   </stromberg-episodes-list>
                 `,
       {
-        imports: [NgxPaginationModule],
-        declarations: [EpisodesListComponent],
+        imports: [NgxPaginationModule, EpisodesListComponent],
         componentProperties: {
           episodes: mockEpisodes,
           selectable: true,

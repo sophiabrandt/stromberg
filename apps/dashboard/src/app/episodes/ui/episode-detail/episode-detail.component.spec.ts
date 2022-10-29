@@ -13,7 +13,7 @@ describe('EpisodeDetailComponent', () => {
                   </stromberg-episode-detail>
                 `,
       {
-        declarations: [EpisodeDetailComponent],
+        imports: [EpisodeDetailComponent],
         componentProperties: {
           selectedEpisode: mockEpisode,
           selected: selectedSpy,

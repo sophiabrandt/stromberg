@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common'
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core'
 import { Episode } from '@stromberg/api-interfaces'
 
@@ -6,6 +7,8 @@ import { Episode } from '@stromberg/api-interfaces'
   templateUrl: './episode-detail.component.html',
   styleUrls: ['./episode-detail.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [CommonModule],
 })
 export class EpisodeDetailComponent {
   @Input()
