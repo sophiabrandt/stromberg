@@ -17,6 +17,15 @@
     "prepare": "husky install"
   },
   "private": true,
+  "pnpm": {
+    "packageExtensions": {
+      "nice-napi": {
+        "optionalDependencies": {
+          "node-gyp": "*"
+        }
+      }
+    }
+  },
   "dependencies": {
     "@angular/animations": "~14.2.7",
     "@angular/common": "~14.2.7",
